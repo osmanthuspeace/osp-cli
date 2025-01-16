@@ -1,0 +1,23 @@
+{
+  "name": "osp-cli",
+  "version": "1.0.0",
+  "description": "A CLI to simplify the process of creating a new project, specially for back-stage management projects.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "osp": "./bin/osp-cli.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^13.0.0",
+    "execa": "^9.5.2",
+    "fs-extra": "^11.3.0",
+    "inquirer": "^12.3.2",
+    "simple-git": "^3.27.0"
+  }
+}
