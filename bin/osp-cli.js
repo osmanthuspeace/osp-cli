@@ -7,12 +7,36 @@ import { execa } from "execa";
 import fs from "fs-extra";
 import path from "path";
 import simpleGit from "simple-git";
+import { fileURLToPath } from "url";
 
-const REPO_URL = "https://github.com/osmanthuspeace/osp-cli";
-const TEMPLATE_DIR = "/template";
+const REPO_URL = "git@github.com:osmanthuspeace/osp-cli.git";
+const TEMPLATE_DIR = "template";
+const defaultProjectName = "new-project";
+const helpMessage = `
+Usage: node osp-cli [options]
 
+Options:
+  init                      Initialize a new project based on user choices
+  -h, --help                Show help message
+  -b, --backstage           Flag to set the backstage mode
+  -v, --version             Show version number
+
+Commands:
+  This CLI allows you to create a new project by selecting a framework, UI library, and package manager.
+
+Example:
+  $ node osp-cli init
+  $ node osp-cli init -b
+`;
 const init = async (options) => {
   const answers = await prompts([
+    {
+      type: "text",
+      name: "projectName",
+      message: "Enter your project name:",
+      initial: defaultProjectName,
+      validate: (input) => (input ? true : "Project name cannot be empty."),
+    },
     {
       type: "select",
       name: "framework",
@@ -40,14 +64,8 @@ const init = async (options) => {
         { title: "npm", value: "npm" },
       ],
     },
-    {
-      type: "text",
-      name: "projectName",
-      message: "Enter your project name:",
-      validate: (input) => (input ? true : "Project name cannot be empty."),
-    },
   ]);
-  const { framework, uiLibrary, packageManager, projectName } = answers;
+  const { projectName, framework, uiLibrary, packageManager } = answers;
 
   const targetDir = path.resolve(process.cwd(), projectName);
   const tempDir = path.resolve(process.cwd(), "temp-repo"); // 临时克隆目录
@@ -59,21 +77,23 @@ const init = async (options) => {
 
   try {
     const git = simpleGit();
-    const templateDir = path.resolve(TEMPLATE_DIR, framework);
+    const templateDir = path.join(TEMPLATE_DIR, framework);
     console.log(
       colors.blue(`\nCloning ${framework} template from ${templateDir}...`)
     );
-    await git.clone(REPO_URL, targetDir, [
+    await git.clone(REPO_URL, tempDir, [
       "--depth=1",
       "--filter=blob:none",
       "--sparse",
     ]);
+    await git.cwd(tempDir);
+    await git.raw(["sparse-checkout", "set", templateDir]); //需要相对路径
 
-    // 进入目标目录
-    await git.cwd(targetDir);
+    const innerDir = path.join(tempDir, templateDir);
+    console.log(colors.blue(`\nCloning ${framework} template completed.`));
+    fs.copySync(innerDir, targetDir);
 
-    console.log(`Setting sparse-checkout for ${templateDir}...`);
-    await git.raw(["sparse-checkout", "set", templateDir]);
+    git.cwd(targetDir);
 
     console.log(
       colors.blue(`\nInstalling dependencies using ${packageManager}...`)
@@ -95,6 +115,13 @@ const args = minimist(process.argv.slice(2));
 if (args._[0] === "init") {
   const backstage = args.backstage || false; // 如果有 `-b` 或 `--backstage` 参数，设置为 true
   init({ backstage });
+} else if (args.h || args.help) {
+  console.log(helpMessage);
+} else if (args.v || args.version) {
+  const packageJson = fs.readJsonSync(
+    path.resolve(fileURLToPath(import.meta.url), "../../package.json")
+  );
+  console.log(`osp-cli version ${packageJson.version}`);
 } else {
   console.log(colors.red("Invalid command"));
 }
