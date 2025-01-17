@@ -9,46 +9,46 @@ import path from "path";
 import simpleGit from "simple-git";
 
 const REPO_URL = "https://github.com/osmanthuspeace/osp-cli";
-const TEMPLATE_DIR = "template";
-
-const answers = await prompts([
-  {
-    type: "select",
-    name: "framework",
-    message: "Choose a framework:",
-    choices: [
-      { title: colors.blue("React"), value: "react" },
-      { title: colors.green("Vue"), value: "vue" },
-    ],
-  },
-  {
-    type: "select",
-    name: "uiLibrary",
-    message: "Choose a UI library:",
-    choices: [
-      { title: "Ant Design", value: "antd" },
-      { title: "Arco Design", value: "arco" },
-    ],
-  },
-  {
-    type: "select",
-    name: "packageManager",
-    message: "Choose a package manager:",
-    choices: [
-      { title: "pnpm", value: "pnpm" },
-      { title: "npm", value: "npm" },
-    ],
-  },
-  {
-    type: "text",
-    name: "projectName",
-    message: "Enter your project name:",
-    validate: (input) => (input ? true : "Project name cannot be empty."),
-  },
-]);
-const { framework, uiLibrary, packageManager, projectName } = answers;
+const TEMPLATE_DIR = "/template";
 
 const init = async (options) => {
+  const answers = await prompts([
+    {
+      type: "select",
+      name: "framework",
+      message: "Choose a framework:",
+      choices: [
+        { title: colors.blue("React"), value: "react" },
+        { title: colors.green("Vue"), value: "vue" },
+      ],
+    },
+    {
+      type: "select",
+      name: "uiLibrary",
+      message: "Choose a UI library:",
+      choices: [
+        { title: "Ant Design", value: "antd" },
+        { title: "Arco Design", value: "arco" },
+      ],
+    },
+    {
+      type: "select",
+      name: "packageManager",
+      message: "Choose a package manager:",
+      choices: [
+        { title: "pnpm", value: "pnpm" },
+        { title: "npm", value: "npm" },
+      ],
+    },
+    {
+      type: "text",
+      name: "projectName",
+      message: "Enter your project name:",
+      validate: (input) => (input ? true : "Project name cannot be empty."),
+    },
+  ]);
+  const { framework, uiLibrary, packageManager, projectName } = answers;
+
   const targetDir = path.resolve(process.cwd(), projectName);
   const tempDir = path.resolve(process.cwd(), "temp-repo"); // 临时克隆目录
 
@@ -59,11 +59,21 @@ const init = async (options) => {
 
   try {
     const git = simpleGit();
-    const templateDir = path.resolve(REPO_URL, TEMPLATE_DIR, framework);
+    const templateDir = path.resolve(TEMPLATE_DIR, framework);
     console.log(
       colors.blue(`\nCloning ${framework} template from ${templateDir}...`)
     );
-    await git.clone(templateDir, targetDir, { "--depth": 1 });
+    await git.clone(REPO_URL, targetDir, [
+      "--depth=1",
+      "--filter=blob:none",
+      "--sparse",
+    ]);
+
+    // 进入目标目录
+    await git.cwd(targetDir);
+
+    console.log(`Setting sparse-checkout for ${templateDir}...`);
+    await git.raw(["sparse-checkout", "set", templateDir]);
 
     console.log(
       colors.blue(`\nInstalling dependencies using ${packageManager}...`)
