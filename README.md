@@ -1,12 +1,15 @@
 # OSP CLI
 
-A command-line tool to quickly scaffold a new project with the selected framework, UI library, package manager and so on.
+### Warning: This project is under development, and there may be major changes in later versions
+
+A command-line tool to quickly scaffold a new back-stage management project
+ with the selected framework in React ecosystem, package manager and so on.
 
 ## Features
 
 - **Simple Project Initialization**
-- **Supports Multiple Frameworks**
-- **Multiple Package Manager Support**:
+- **Multiple Frameworks and Package Manager Support**:
+- **Can be highly customizable**:
 
 ## Installation
 

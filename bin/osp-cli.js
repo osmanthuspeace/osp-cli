@@ -39,20 +39,21 @@ const init = async (options) => {
     },
     {
       type: "select",
-      name: "framework",
-      message: "Choose a framework:",
+      name: "language",
+      message: "Choose a language:",
       choices: [
-        { title: colors.blue("React"), value: "react" },
-        { title: colors.green("Vue"), value: "vue" },
+        { title: colors.yellow("JavaScript"), value: "" },
+        { title: colors.blue("TypeScript"), value: "-ts" },
       ],
     },
     {
       type: "select",
-      name: "uiLibrary",
-      message: "Choose a UI library:",
+      name: "framework",
+      message: "Choose a framework:",
       choices: [
-        { title: "Ant Design", value: "antd" },
-        { title: "Arco Design", value: "arco" },
+        { title: colors.blue("React"), value: "react" },
+        { title: colors.green("Nextjs"), value: "nextjs" },
+        { title: colors.cyan("React-Native"), value: "react-native" },
       ],
     },
     {
@@ -62,10 +63,11 @@ const init = async (options) => {
       choices: [
         { title: "pnpm", value: "pnpm" },
         { title: "npm", value: "npm" },
+        // { title: "yarn", value: "yarn" },
       ],
     },
   ]);
-  const { projectName, framework, uiLibrary, packageManager } = answers;
+  const { projectName, language, framework, packageManager } = answers;
 
   const targetDir = path.resolve(process.cwd(), projectName);
   const tempDir = path.resolve(process.cwd(), "temp-repo"); // 临时克隆目录
@@ -77,7 +79,7 @@ const init = async (options) => {
 
   try {
     const git = simpleGit();
-    const templateDir = path.join(TEMPLATE_DIR, framework);
+    const templateDir = path.join(TEMPLATE_DIR, framework + language);
     console.log(
       colors.blue(`\nCloning ${framework} template from ${templateDir}...`)
     );
