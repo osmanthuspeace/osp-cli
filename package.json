@@ -1,6 +1,6 @@
 {
   "name": "osp-cli",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A CLI to simplify the process of creating a new project, specially for back-stage management projects.",
   "repository": {
     "type": "git",
@@ -15,6 +15,7 @@
   },
   "keywords": [
     "cli",
+    "react",
     "frontend",
     "project-setup",
     "template-generator"
@@ -28,5 +29,14 @@
     "picocolors": "^1.1.1",
     "prompts": "^2.4.2",
     "simple-git": "^3.27.0"
+  },
+  "devDependencies": {
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }

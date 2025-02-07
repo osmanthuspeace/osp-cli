@@ -8,8 +8,8 @@ A command-line tool to quickly scaffold a new back-stage management project
 ## Features
 
 - **Simple Project Initialization**
-- **Multiple Frameworks and Package Manager Support**:
-- **Can be highly customizable**:
+- **Multiple Frameworks and Package Manager Support**
+- **Can be highly customizable**
 
 ## Installation
 

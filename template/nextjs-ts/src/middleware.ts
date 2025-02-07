@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export const middleware = (request: NextRequest) => {
-  const token = "";
+  const token = true;
   if (request.nextUrl.pathname === "/") {
     if (token) {
       return NextResponse.redirect(new URL("/home", request.url));
