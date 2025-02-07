@@ -9,7 +9,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"No tests yet\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "commit": "git add . && pnpm cz && git push origin main"
   },
   "bin": {
     "osp": "./bin/osp-cli.js"
