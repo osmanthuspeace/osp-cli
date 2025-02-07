@@ -12,6 +12,7 @@ jobs:
       contents: write
       issues: write
       pull-requests: write
+      id-token: write # https://github.com/semantic-release/npm/blob/master/README.md#npm-provenance-on-github-actions
 
     steps:
       - name: Checkout repository
@@ -22,11 +23,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "latest"
+          node-version: "latest" # 需要20+
           registry-url: "https://registry.npmjs.org/"
 
       - name: Set up pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v2 # 使用官方的 pnpm action
         with:
           version: 8
 
@@ -35,6 +36,6 @@ jobs:
 
       - name: Run Semantic Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 无需手动设置，GitHub 会自动注入
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # 使用Automation类型的Token
         run: npx semantic-release
