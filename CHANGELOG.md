@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/osmanthuspeace/osp-cli/compare/v1.2.0...v1.3.0) (2025-02-08)
+
+
+### Features
+
+* **nextjs:** optimizing the action ([9514634](https://github.com/osmanthuspeace/osp-cli/commit/9514634961e816018a1b1e8ebe812972aa5027b9))
+* **nextjs:** splitting up components ([3b6c339](https://github.com/osmanthuspeace/osp-cli/commit/3b6c339fb5265af32501037286db0f8efe224061))
+
 # 1.0.0 (2025-02-07)
 
 
