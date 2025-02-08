@@ -3,9 +3,10 @@
 import { Button, Layout, Menu, theme } from "antd";
 import { Children } from "@/type";
 import { ItemType, MenuItemType } from "antd/es/menu/interface";
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { FolderOutlined, MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined, UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import "./layout.css";
 const { Header, Sider, Content } = Layout;
 
 export default function MainLayout({ children }: Children) {
