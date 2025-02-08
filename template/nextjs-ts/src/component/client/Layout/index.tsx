@@ -1,5 +1,7 @@
+"use client";
+
 import React from "react";
-import { Direction } from "../../type";
+import { Direction } from "../../../type";
 
 export interface LayoutProps {
   children: React.ReactNode | React.ReactNode[];
