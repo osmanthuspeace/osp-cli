@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/osmanthuspeace/osp-cli/compare/v1.3.0...v1.4.0) (2025-02-12)
+
+
+### Features
+
+* **nextjs:** finish mock ([f6dabe4](https://github.com/osmanthuspeace/osp-cli/commit/f6dabe4ff1d80658c6bfd114f1f9dddab161504e))
+
 # [1.3.0](https://github.com/osmanthuspeace/osp-cli/compare/v1.2.0...v1.3.0) (2025-02-08)
 
 
