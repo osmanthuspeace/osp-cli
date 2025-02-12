@@ -71,7 +71,7 @@ export default function MainLayout({ children }: Children) {
           style={{
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
-          }}
+            }}
         >
           {children}
         </Content>

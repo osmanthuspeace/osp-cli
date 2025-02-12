@@ -11,7 +11,7 @@ const UserListClient = ({ initialUsers }: { initialUsers: User[] }) => {
   const onLoadMore = async () => {
     setLoading(true);
     const newUsers = await fetchMoreUsers(data);
-    setData((prev) => [...prev, ...newUsers]);
+    setData(() => [...newUsers]);
     setLoading(false);
   };
 

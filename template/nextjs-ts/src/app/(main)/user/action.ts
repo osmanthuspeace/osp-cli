@@ -1,3 +1,4 @@
+"use server";
 export interface User {
   gender?: string;
   name: {
@@ -13,16 +14,20 @@ export interface User {
   };
   nat?: string;
 }
-
+const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 const fakeDataUrl = `/api/users`;
+const dataUrl = `${baseUrl}${fakeDataUrl}`;
 
 export async function fetchUsers(): Promise<User[]> {
   try {
-    const res = await fetch(fakeDataUrl);
-    console.log("res", res);
+    console.log("fetchUsers");
+    const res = await fetch("http://localhost:3000/api/users");
+
+    if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
 
     const data = await res.json();
-    return data.results;
+
+    return data;
   } catch (e) {
     console.log(e);
     return [];
@@ -31,7 +36,17 @@ export async function fetchUsers(): Promise<User[]> {
 
 //Server Action
 export async function fetchMoreUsers(currentUsers: User[]): Promise<User[]> {
-  const res = await fetch(fakeDataUrl, { cache: "no-store" });
-  const { results } = await res.json();
-  return currentUsers.concat(results);
+  try {
+    console.log("fetchMoreUsers");
+    const res = await fetch(dataUrl);
+
+    if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+
+    const results = await res.json();
+
+    return currentUsers.concat(results);
+  } catch (e) {
+    console.error("Failed to fetch more users:", e);
+    return currentUsers;
+  }
 }

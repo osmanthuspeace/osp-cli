@@ -20,9 +20,10 @@
   margin: 24px 16px;
   padding: 24px;
   min-height: 280px;
+  overflow: scroll;
 }
 .collapsed-button {
   font-size: 16px;
   width: 64px !important;
-  height: 64px;
+  height: 64px !important;
 }
