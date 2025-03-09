@@ -1,3 +1,11 @@
+# [1.5.0](https://github.com/osmanthuspeace/osp-cli/compare/v1.4.0...v1.5.0) (2025-03-09)
+
+
+### Features
+
+* add astro template, extend template type ([7f458ba](https://github.com/osmanthuspeace/osp-cli/commit/7f458ba796ba21b3333958e24a81b19083a17f96))
+* add more template ([e78bbd1](https://github.com/osmanthuspeace/osp-cli/commit/e78bbd1d9cb3dab1e79d9c1f6e2cba2934400b0a))
+
 # [1.4.0](https://github.com/osmanthuspeace/osp-cli/compare/v1.3.0...v1.4.0) (2025-02-12)
 
 
