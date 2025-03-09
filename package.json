@@ -1,7 +1,7 @@
 {
   "name": "osp-cli",
   "version": "1.4.0",
-  "description": "A CLI to simplify the process of creating a new project, specially for back-stage management projects.",
+  "description": "A CLI to simplify the process of creating common frontend projects",
   "repository": {
     "type": "git",
     "url": "https://github.com/osmanthuspeace/osp-cli"

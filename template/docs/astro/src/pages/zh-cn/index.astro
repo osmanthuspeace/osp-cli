@@ -1,0 +1,28 @@
+---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import { Card, CardGrid } from "@astrojs/starlight/components";
+---
+
+<StarlightPage
+  frontmatter={{
+    title: "欢迎使用 Osmanthus-UI",
+    description: "一个具备流畅动画和高性能的 React 拖放排序组件库",
+    template: "splash",
+    hero: {
+      tagline: "立即在您的新项目中使用 Osmanthus-UI！",
+      actions: [
+        {
+          text: "示例指南",
+          link: "/zh-cn/getting-started/quick-start",
+          icon: "right-arrow",
+        },
+        {
+          text: "查看 Osmanthus-UI 文档",
+          link: "/zh-cn/components/sortable",
+          icon: "external",
+          variant: "minimal",
+        },
+      ],
+    },
+  }}
+/>

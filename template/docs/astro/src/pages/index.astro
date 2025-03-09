@@ -1,0 +1,29 @@
+---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+---
+
+<StarlightPage
+  frontmatter={{
+    title: "Welcome to Osmanthus-UI",
+    description:
+      "A drag & drop & sort component library for React with better animation and performance.",
+    template: "splash",
+    hero: {
+      tagline: "Use Osmanthus-UI in your new project!",
+      actions: [
+        {
+          text: "Example Guide",
+          link: "/getting-started/quick-start",
+          icon: "right-arrow",
+        },
+        {
+          text: "Read the Osmanthus-ui docs",
+          link: "/docs/sortable",
+          icon: "external",
+          variant: "minimal",
+        },
+      ],
+    },
+  }}
+/>
+
